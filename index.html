@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get GIFs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Get GIFs of your Choice</h1>
+    <input type="text" placeholder="Enter text" id="input">
+    <button onclick="searchGifs()">Search</button>
+    <br>
+    <img id="myGif" src="https://media.giphy.com/media/KShuE9tlWzJ3QLMhvu/giphy.gif" alt="myGif">
+
+    <script>
+        async function searchGifs() {
+            const result = document.querySelector("#myGif");
+            const input = document.querySelector("#input");
+
+            try {
+                const response = await fetch(`/search?query=${input.value}`);
+                const data = await response.json();
+                console.log(data);
+                console.log("kKk")
+
+                result.src = data; // Assuming the API returns a single URL as a string
+            } catch (error) {
+                console.error("Error fetching the GIF:", error);
+            }
+        }
+    </script>
+</body>
+</html>
